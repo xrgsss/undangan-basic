@@ -1,0 +1,28 @@
+{
+  "name": "undangan-pernikahan-digital",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Website undangan pernikahan digital premium - floral klasik ivory, champagne gold, dusty blue, olive green.",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "assets": "node scripts/generate-placeholder-assets.mjs",
+    "smoke": "vite build --config vite.smoke.config.js && node .smoke/smoke-render.mjs"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.118.0",
+    "framer-motion": "^14.3.0",
+    "lucide-react": "^1.59.0",
+    "qrcode": "^1.5.4",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.3.3",
+    "@vitejs/plugin-react": "^6.1.2",
+    "tailwindcss": "^4.3.3",
+    "vite": "^8.3.4"
+  }
+}

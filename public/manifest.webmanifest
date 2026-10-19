@@ -1,0 +1,18 @@
+{
+  "name": "Undangan Pernikahan Diana & Hengki",
+  "short_name": "Diana & Hengki",
+  "description": "Undangan pernikahan digital Diana & Hengki — Sabtu, 14 November 2026.",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#F7F5EF",
+  "theme_color": "#F7F5EF",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

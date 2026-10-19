@@ -1,0 +1,297 @@
+@import 'tailwindcss';
+
+/* ==========================================================================
+   DESIGN TOKENS — palet & tipografi undangan
+   Ubah nilai di sini untuk mengganti seluruh nuansa website sekaligus.
+   ========================================================================== */
+@theme {
+  /* Palet utama */
+  --color-ivory: #f7f5ef;
+  --color-ivory-50: #fffdf8;
+  --color-ivory-100: #f2efe6;
+  --color-ivory-200: #e9e3d5;
+  --color-ivory-300: #ddd5c3;
+
+  --color-champagne: #b9955b;
+  --color-champagne-200: #e6d5b4;
+  --color-champagne-300: #d6bd93;
+  --color-champagne-400: #c9a972;
+  --color-champagne-600: #9a7a46;
+  --color-champagne-700: #7c6137;
+
+  --color-dusty: #7188a5;
+  --color-dusty-200: #cbd5e1;
+  --color-dusty-300: #a9b9cc;
+  --color-dusty-400: #8b9fb8;
+  --color-dusty-600: #5e7694;
+  --color-dusty-700: #4f6480;
+  --color-dusty-900: #35455c;
+
+  --color-olive: #77785f;
+  --color-olive-300: #a8a893;
+  --color-olive-500: #77785f;
+  --color-olive-700: #5c5d47;
+
+  --color-cocoa: #5b5044;
+  --color-cocoa-300: #a1958a;
+  --color-cocoa-400: #857a6d;
+  --color-cocoa-600: #4a4137;
+
+  /* Tipografi */
+  --font-sans: 'Lato', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-serif: 'Cormorant Garamond', ui-serif, Georgia, 'Times New Roman', serif;
+  --font-display: 'Playfair Display', ui-serif, Georgia, 'Times New Roman', serif;
+  --font-script: 'Great Vibes', 'Cormorant Garamond', cursive;
+
+  /* Bayangan lembut */
+  --shadow-soft: 0 8px 24px -14px rgb(91 80 68 / 0.28);
+  --shadow-card: 0 20px 48px -26px rgb(91 80 68 / 0.42);
+  --shadow-gold: 0 12px 28px -14px rgb(185 149 91 / 0.6);
+  --shadow-glow: 0 0 0 1px rgb(255 255 255 / 0.5) inset, 0 18px 40px -20px rgb(185 149 91 / 0.5);
+
+  --radius-card: 1.125rem;
+  --radius-petal: 62% 38% 55% 45% / 45% 52% 48% 55%;
+
+  /* Animasi */
+  --animate-float: float 9s ease-in-out infinite;
+  --animate-float-slow: float-slow 14s ease-in-out infinite;
+  --animate-shimmer: shimmer 2.8s linear infinite;
+  --animate-spin-slow: spin-slow 12s linear infinite;
+  --animate-pulse-soft: pulse-soft 2.6s ease-in-out infinite;
+  --animate-petal: petal 16s linear infinite;
+
+  /* Tekstur kertas halus (noise SVG, tanpa request jaringan) */
+  --paper-noise: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -12px, 0);
+  }
+}
+
+@keyframes float-slow {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate3d(0, -18px, 0) rotate(2.5deg);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-130%) skewX(-18deg);
+  }
+  60%,
+  100% {
+    transform: translateX(230%) skewX(-18deg);
+  }
+}
+
+@keyframes spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse-soft {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.06);
+  }
+}
+
+@keyframes petal {
+  0% {
+    transform: translate3d(0, -8vh, 0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.55;
+  }
+  90% {
+    opacity: 0.35;
+  }
+  100% {
+    transform: translate3d(14vw, 108vh, 0) rotate(320deg);
+    opacity: 0;
+  }
+}
+
+/* ==========================================================================
+   BASE
+   ========================================================================== */
+@layer base {
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-ivory);
+    color: var(--color-cocoa);
+    font-family: var(--font-sans);
+    font-weight: 400;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Saat cover terbuka, konten di belakang tidak boleh di-scroll */
+  body.invitation-locked {
+    overflow: hidden;
+    height: 100dvh;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    font-family: var(--font-display);
+    color: var(--color-cocoa);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-champagne);
+    outline-offset: 3px;
+    border-radius: 3px;
+  }
+
+  ::selection {
+    background: color-mix(in oklab, var(--color-champagne) 32%, white);
+    color: var(--color-cocoa-600);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+    }
+  }
+}
+
+/* ==========================================================================
+   UTILITIES KUSTOM
+   ========================================================================== */
+
+/* Overlay tekstur kertas — taruh sebagai <div aria-hidden className="paper-grain" /> */
+@utility paper-grain {
+  background-image: var(--paper-noise);
+  background-repeat: repeat;
+  background-size: 220px 220px;
+  mix-blend-mode: multiply;
+  opacity: 0.045;
+  pointer-events: none;
+}
+
+@utility safe-bottom {
+  padding-bottom: max(env(safe-area-inset-bottom, 0px), 0.5rem);
+}
+
+@utility safe-top {
+  padding-top: max(env(safe-area-inset-top, 0px), 0.75rem);
+}
+
+@utility safe-x {
+  padding-left: max(env(safe-area-inset-left, 0px), 0px);
+  padding-right: max(env(safe-area-inset-right, 0px), 0px);
+}
+
+@utility no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Teks emas bergradasi — untuk judul mewah */
+@utility text-gilded {
+  background-image: linear-gradient(100deg, #9a7a46 0%, #d6bd93 38%, #b9955b 62%, #7c6137 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Garis tipis emas bergradasi */
+@utility gold-rule {
+  background-image: linear-gradient(
+    to right,
+    transparent 0%,
+    color-mix(in oklab, var(--color-champagne) 55%, transparent) 22%,
+    var(--color-champagne) 50%,
+    color-mix(in oklab, var(--color-champagne) 55%, transparent) 78%,
+    transparent 100%
+  );
+}
+
+/* Kartu kertas */
+@utility paper-card {
+  background-color: color-mix(in oklab, var(--color-ivory-50) 92%, white);
+  border: 1px solid color-mix(in oklab, var(--color-champagne) 26%, transparent);
+  box-shadow: var(--shadow-card);
+  backdrop-filter: blur(2px);
+}
+
+/* Input bergaya undangan */
+@utility input-elegant {
+  width: 100%;
+  background-color: color-mix(in oklab, white 78%, var(--color-ivory));
+  border: 1px solid color-mix(in oklab, var(--color-champagne) 32%, transparent);
+  border-radius: 0.75rem;
+  padding: 0.7rem 0.95rem;
+  font-size: 0.95rem;
+  color: var(--color-cocoa-600);
+  transition:
+    border-color 220ms ease,
+    box-shadow 220ms ease,
+    background-color 220ms ease;
+  &::placeholder {
+    color: color-mix(in oklab, var(--color-cocoa-400) 65%, transparent);
+  }
+  &:focus {
+    outline: none;
+    border-color: var(--color-champagne);
+    background-color: white;
+    box-shadow: 0 0 0 3px color-mix(in oklab, var(--color-champagne) 20%, transparent);
+  }
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+/* Sembunyikan scrollbar tapi tetap bisa scroll (untuk menu horizontal) */
+@utility scroll-x-soft {
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in oklab, var(--color-champagne) 45%, transparent) transparent;
+}
+
+/* Padding bawah halaman agar konten tidak tertutup bottom navigation */
+@utility pb-below-nav {
+  padding-bottom: calc(6.25rem + env(safe-area-inset-bottom, 0px));
+}
